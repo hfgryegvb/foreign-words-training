@@ -29,7 +29,7 @@ const array = words.frontWord.length;
 totalWord.textContent = array;
 
 
-//подсчет прогресса для режима тренировки
+
 function getWordProgress(i) {
   return (100 * (i + 1)) / array;
 }
@@ -69,7 +69,7 @@ buttonBack.addEventListener('click', () => {
 
 })
 
-//переворачивание карточек
+
 flipCard.addEventListener('click', () => {
   if (flipCard.classList.contains('active')) {
     flipCard.classList.remove('active');
@@ -142,8 +142,8 @@ let indexTwoCard = 0;
 
 
 cardsContainer.addEventListener('click', (event) => {
-  let examCard = event.target.closest('.card');
-  if (click == false) {
+  const examCard = event.target.closest('.card');
+  if (!click) {
     examCard.classList.add('correct');
     oneCard = examCard;
     indexOneCard = words.frontWord.indexOf(examCard.textContent);
@@ -152,7 +152,7 @@ cardsContainer.addEventListener('click', (event) => {
     }
     click = true;
 
-  } else if (click == true) {
+  } else if (!!click) {
     twoCard = examCard;
     indexTwoCard = words.frontWord.indexOf(examCard.textContent);
     if (indexTwoCard == -1) {
@@ -168,9 +168,9 @@ cardsContainer.addEventListener('click', (event) => {
         clearInterval(time);
       }
       click = false;
-    } else if (indexOneCard != indexTwoCard) {
+    } else {
+      (indexOneCard != indexTwoCard) 
       click = false;
-      twoCard.classList.add('wrong');
       setTimeout(() => {
         oneCard.classList.remove('correct');
         twoCard.classList.remove('wrong');
